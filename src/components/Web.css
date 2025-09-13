@@ -1,0 +1,57 @@
+.web-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9fafb;
+  font-family: Arial, sans-serif;
+}
+
+.web-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  max-width: 600px;
+  text-align: center;
+}
+
+.web-card h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.web-card .highlight {
+  color: #007bff;
+}
+
+.web-card p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.start-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #0056b3;
+}
+
+.footer-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+}
