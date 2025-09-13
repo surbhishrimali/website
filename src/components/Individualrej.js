@@ -65,7 +65,9 @@ function IndividualRegistration() {
 
             <div className="form-buttons">
               <button onClick={prevStep}>Back</button>
-              <button className="submit-btn">SUBMIT & GENERATE ID</button>
+              <button onClick={() => navigate('/generated-id')} className="submit-btn" >
+              SUBMIT & GENERATE ID
+              </button>
               <button>Save Draft</button>
             </div>
           </div>
