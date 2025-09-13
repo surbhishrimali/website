@@ -6,6 +6,29 @@ function IndividualRegistration() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    fullName: '',
+    age: '',
+    bloodGroup: '',
+    nationality: '',
+    gender: '',
+    aadhaar: '',
+    contact: '',
+    email: '',
+    placesToVisit: '',
+    hotel: '',
+    arrivalDate: '',
+    departureDate: '',
+    transportDetails: '',
+    emergencyName: '',
+    emergencyContact: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const nextStep = () => setStep(2);
   const prevStep = () => setStep(1);
 
@@ -17,21 +40,50 @@ function IndividualRegistration() {
 
         {step === 1 && (
           <div className="form-step">
-            <input type="text" placeholder="Full Name" />
-            <input type="text" placeholder="Age" />
-            <input type="text" placeholder="Blood Group (Optional)" />
+            <div className="form-group">
+              <label>Full Name</label>
+              <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="John Doe" />
+            </div>
 
-            <input type="text" placeholder="Nationality" />
-            <select>
-              <option>Select Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
+            <div className="form-group">
+              <label>Age</label>
+              <input type="text" name="age" value={formData.age} onChange={handleChange} placeholder="30" />
+            </div>
 
-            <input type="text" placeholder="Aadhaar / Passport No." />
-            <input type="text" placeholder="Contact No." />
-            <input type="email" placeholder="Email" />
+            <div className="form-group">
+              <label>Blood Group (Optional)</label>
+              <input type="text" name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} placeholder="A+" />
+            </div>
+
+            <div className="form-group">
+              <label>Nationality</label>
+              <input type="text" name="nationality" value={formData.nationality} onChange={handleChange} placeholder="Indian" />
+            </div>
+
+            <div className="form-group">
+              <label>Gender</label>
+              <select name="gender" value={formData.gender} onChange={handleChange}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Aadhaar / Passport No.</label>
+              <input type="text" name="aadhaar" value={formData.aadhaar} onChange={handleChange} placeholder="XXXX-XXXX-7896" />
+            </div>
+
+            <div className="form-group">
+              <label>Contact No.</label>
+              <input type="text" name="contact" value={formData.contact} onChange={handleChange} placeholder="+91 9876543210" />
+            </div>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="example@email.com" />
+            </div>
 
             <div className="file-upload">
               <div className="upload-area">
@@ -49,24 +101,50 @@ function IndividualRegistration() {
 
         {step === 2 && (
           <div className="form-step">
-            <input type="text" placeholder="Places to Visit (comma separated)" />
-            <input type="text" placeholder="Hotel (optional)" />
+            <div className="form-group">
+              <label>Places to Visit (comma separated)</label>
+              <input type="text" name="placesToVisit" value={formData.placesToVisit} onChange={handleChange} placeholder="Place1, Place2" />
+            </div>
 
-            <label>Arrival Date</label>
-            <input type="date" />
-            <label>Departure Date</label>
-            <input type="date" />
+            <div className="form-group">
+              <label>Hotel (optional)</label>
+              <input type="text" name="hotel" value={formData.hotel} onChange={handleChange} placeholder="Hotel Name" />
+            </div>
 
-            <input type="text" placeholder="Transport Details (optional)" />
+            <div className="form-group">
+              <label>Arrival Date</label>
+              <input type="date" name="arrivalDate" value={formData.arrivalDate} onChange={handleChange} />
+            </div>
+
+            <div className="form-group">
+              <label>Departure Date</label>
+              <input type="date" name="departureDate" value={formData.departureDate} onChange={handleChange} />
+            </div>
+
+            <div className="form-group">
+              <label>Transport Details (optional)</label>
+              <input type="text" name="transportDetails" value={formData.transportDetails} onChange={handleChange} placeholder="Bus, Car etc." />
+            </div>
 
             <h4>*Emergency Contacts (Optional)</h4>
-            <input type="text" placeholder="Person's Name" />
-            <input type="text" placeholder="Contact No." />
+
+            <div className="form-group">
+              <label>Person's Name</label>
+              <input type="text" name="emergencyName" value={formData.emergencyName} onChange={handleChange} placeholder="Jane Doe" />
+            </div>
+
+            <div className="form-group">
+              <label>Contact No.</label>
+              <input type="text" name="emergencyContact" value={formData.emergencyContact} onChange={handleChange} placeholder="+91 9123456780" />
+            </div>
 
             <div className="form-buttons">
               <button onClick={prevStep}>Back</button>
-              <button onClick={() => navigate('/generated-id')} className="submit-btn" >
-              SUBMIT & GENERATE ID
+              <button
+                className="submit-btn"
+                onClick={() => navigate('/generated-id' , { state: formData })}
+              >
+                SUBMIT & GENERATE ID
               </button>
               <button>Save Draft</button>
             </div>
