@@ -127,11 +127,8 @@ p {
   cursor: pointer;
 }
 
-.next-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.submit-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
 }

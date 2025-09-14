@@ -80,3 +80,7 @@ h1 {
   cursor: pointer;
   width: 30px;
 } */
+
+.next-bnt{
+  align-self: flex-end;
+}

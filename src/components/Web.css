@@ -52,6 +52,7 @@
 
 .footer-note {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: 8px;
   color: #888;
+  align-self: start;
 }

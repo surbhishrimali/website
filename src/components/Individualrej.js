@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Individualrej.css';
 import { useNavigate } from 'react-router-dom';
 
 function IndividualRegistration() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -15,6 +16,7 @@ function IndividualRegistration() {
     aadhaar: '',
     contact: '',
     email: '',
+    uploadedFile: null,
     placesToVisit: '',
     hotel: '',
     arrivalDate: '',
@@ -24,10 +26,34 @@ function IndividualRegistration() {
     emergencyContact: '',
   });
 
-  const handleChange = (e) => {
+   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const openFileDialog = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, uploadedFile: e.target.files[0] });
+  };
+
+  const isFormValid = () => {
+  return (
+    formData.fullName &&
+    formData.age &&
+    formData.nationality &&
+    formData.gender &&
+    formData.aadhaar &&
+    formData.contact &&
+    formData.email &&
+    formData.placesToVisit &&
+    formData.arrivalDate &&
+    formData.departureDate
+  );
+};
+
 
   const nextStep = () => setStep(2);
   const prevStep = () => setStep(1);
@@ -90,7 +116,22 @@ function IndividualRegistration() {
                 <p>Drag & drop files or <span>Browse</span></p>
                 <small>Supported formats: JPEG, PNG, GIF, PDF, Word, PPT</small>
               </div>
-              <button>UPLOAD FILES</button>
+
+                 <input
+                type="file"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
+
+              <button type="button" onClick={openFileDialog}>
+                UPLOAD FILES
+              </button>
+
+              {formData.uploadedFile && (
+                <p><strong>Uploaded:</strong> {formData.uploadedFile.name}</p>
+              )}
+
             </div>
 
             <button className="next-btn" onClick={nextStep}>
@@ -143,6 +184,7 @@ function IndividualRegistration() {
               <button
                 className="submit-btn"
                 onClick={() => navigate('/generated-id' , { state: formData })}
+                disabled={!isFormValid()}
               >
                 SUBMIT & GENERATE ID
               </button>
